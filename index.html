@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeVerse!!!1!!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- fake cursor (the real one is hidden so we can "freeze" it) -->
+  <div id="fake-cursor"></div>
+
+  <!-- the doom countdown -->
+  <div id="doom-timer" class="doom-timer">⏰ SURPRISE IN <span id="doom-count">--</span> SECONDS ⏰</div>
+
+  <!-- the "click NEXT or else" countdown -->
+  <div id="next-timer" class="next-timer hidden">⚠️ CLICK <u>NEXT</u> IN <span id="next-count">10</span>s OR ELSE ⚠️</div>
+
+  <!-- footer. at the top. obviously. -->
+  <footer class="top-footer">© 1997 CodeVerse™ &nbsp;|&nbsp; This is the footer. It lives at the top now. &nbsp;|&nbsp; Best viewed in Netscape Navigator 3.0 at 640x480</footer>
+
+  <div class="marquee"><span>🔥 WELCOME TO CODEVERSE 🔥 THE GREATEST WEBSITE EVER BUILT 🔥 PLEASE ENJOY OUR MANY ADS 🔥 DO NOT TRUST THE NAVIGATION 🔥 THE VOLUME SLIDER IS FINE, ACTUALLY 🔥 🕷️ SPIDER-MAN CONTROLS THE VOLUME NOW. DON'T ASK. 🕷️ WELCOME TO CODEVERSE 🔥</span></div>
+
+  <div class="layout">
+
+    <!-- ===== NAVIGATION (on the right, labels are lies) ===== -->
+    <nav class="nav">
+      <div class="nav-title">MENU ⬇⬆</div>
+      <button class="btn nav-btn" data-action="goto" data-target="2">🏠 Home</button>
+      <button class="btn nav-btn" data-action="goto" data-target="3">📅 Schedule</button>
+      <button class="btn nav-btn" data-action="goto" data-target="0">🏆 Prizes</button>
+      <button class="btn nav-btn" data-action="goto" data-target="1">📝 Register</button>
+      <button class="btn nav-btn" data-action="prev">⬅ Forward</button>
+      <button class="btn nav-btn tiny" data-action="none">click here for nothing</button>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="pages">
+
+      <!-- PAGE 0 -->
+      <section class="page active" data-page="0">
+        <h2 class="wobble">WELCOME 2 CODEVERSE!!!</h2>
+        <p class="p-yellow">CodeVerse is the <b>number one</b> coding event in the entire known universe (source: us). Join hundreds of developers for 24 hours of code, snacks, and regret.</p>
+        <button class="btn decoy" data-action="prev">NEXT ⬅ (probably)</button>
+        <p class="p-cyan right">We have workshops, mentors, free Wi-Fi (password is on page 7, there are 4 pages), and a very good volume slider.</p>
+        <p class="p-pink center">Scroll down to learn more. Scroll up to learn less, slowly.</p>
+        <div class="spacer-text">
+          <p>Fun fact: this paragraph exists so that you have to scroll. Please scroll. Scrolling is good for you. Doctors recommend 10,000 scrolls a day.</p>
+        </div>
+        <button class="btn next-btn pos-left" data-action="next">NEXT ➡</button>
+      </section>
+
+      <!-- PAGE 1 -->
+      <section class="page" data-page="1">
+        <button class="btn next-btn pos-top" data-action="next">NEXT ➡</button>
+        <h2 class="wobble">📅 SCHEDULE (TENTATIVE) (FINAL)</h2>
+        <table class="ugly-table">
+          <tr><th>Time</th><th>Thing</th><th>Where</th></tr>
+          <tr><td>09:00</td><td>Opening Ceremony</td><td>Main Hall</td></tr>
+          <tr><td>10:00</td><td>Hacking Begins</td><td>Everywhere</td></tr>
+          <tr><td>13:00</td><td>Lunch (pizza again)</td><td>Cafeteria</td></tr>
+          <tr><td>18:00</td><td>Mentor Check-in</td><td>Room 404 (not found)</td></tr>
+          <tr><td>09:00</td><td>Submissions Due</td><td>The Portal</td></tr>
+          <tr><td>11:00</td><td>Judging &amp; Prizes</td><td>Main Hall</td></tr>
+        </table>
+        <button class="btn decoy" data-action="goto" data-target="0">NEXT? ➡</button>
+      </section>
+
+      <!-- PAGE 2 -->
+      <section class="page" data-page="2">
+        <h2 class="wobble">🏆 PRIZES 🏆</h2>
+        <ul class="prize-list">
+          <li>🥇 1st Place — A trophy and eternal glory</li>
+          <li>🥈 2nd Place — A slightly smaller trophy</li>
+          <li>🥉 3rd Place — A sticker (limited edition)</li>
+          <li>🎨 Best UI — Not you. Definitely not this website.</li>
+          <li>🐛 Most Bugs — Free debugging session</li>
+        </ul>
+        <button class="btn decoy" data-action="prev">NEXT</button>
+        <div class="spacer-text"><p>All prizes subject to availability, mood, and the alignment of the planets.</p></div>
+        <button class="btn next-btn pos-right" data-action="next">NEXT ➡</button>
+      </section>
+
+      <!-- PAGE 3 -->
+      <section class="page" data-page="3">
+        <h2 class="wobble">📝 REGISTER NOW!!!</h2>
+        <form class="ugly-form" onsubmit="return false">
+          <label>Name <input type="text" placeholder="your name (backwards)"></label>
+          <label>Email <input type="email" placeholder="you@example.com"></label>
+          <label>Favourite colour
+            <select>
+              <option>Neon Green</option>
+              <option>Neon Pink</option>
+              <option>Neon Yellow</option>
+              <option>Neon Neon</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox"> I agree to the ads</label>
+          <button type="button" class="btn decoy" data-action="prev">SUBMIT</button>
+          <button type="button" class="btn next-btn pos-left" data-action="finish">NEXT ➡ (this one submits)</button>
+        </form>
+      </section>
+
+      <!-- filler so there's something to scroll through -->
+      <div class="terms">
+        <h3>TERMS &amp; CONDITIONS (MANDATORY READING)</h3>
+        <p>1. By looking at this website you agree to look at this website.</p>
+        <p>2. All clicks are final. Every click comes with a complimentary advertisement.</p>
+        <p>3. The cursor may take scheduled breaks. This is a feature.</p>
+        <p>4. The countdown at the top is counting down to something. Do not worry about it.</p>
+        <p>5. Scrolling down is fast because we believe in progress. Scrolling up is slow because we do not believe in going back.</p>
+        <p>6. The close button on ads is shy. Please respect its boundaries.</p>
+        <p>7. These terms may change at any time, including right now.</p>
+        <p>8. You have reached the end of the terms. Or have you.</p>
+      </div>
+    </main>
+
+    <!-- ===== VOLUME (a vertical web — swing Spidey left/right to change it) ===== -->
+    <aside class="vol-panel" id="vol-panel">
+      <div class="vol-title">🕸️ SPIDER-VOLUME 🕸️</div>
+      <div class="web-rig">
+        <div class="web-anchor"></div>
+        <div class="web-pendulum" id="vol-pendulum">
+          <div class="web-line"></div>
+          <svg class="spidey" viewBox="0 0 60 100" width="60" height="100" aria-hidden="true">
+            <!-- legs, holding the web -->
+            <path d="M24 0 L22 30 L28 30 L30 4 L32 30 L38 30 L36 0 Z" fill="#0033cc" stroke="#000" stroke-width="1.5"/>
+            <!-- arms dangling -->
+            <path d="M18 34 L8 58 M42 34 L52 58" stroke="#000" stroke-width="8" stroke-linecap="round"/>
+            <path d="M18 34 L8 58 M42 34 L52 58" stroke="#e00000" stroke-width="5" stroke-linecap="round"/>
+            <!-- torso + spider emblem -->
+            <rect x="18" y="28" width="24" height="30" rx="6" fill="#e00000" stroke="#000" stroke-width="1.5"/>
+            <path d="M30 38 v12 M24 40 l12 8 M36 40 l-12 8" stroke="#000" stroke-width="1.5"/>
+            <!-- head (upside down, obviously) -->
+            <ellipse cx="30" cy="76" rx="16" ry="20" fill="#e00000" stroke="#000" stroke-width="1.5"/>
+            <path d="M30 56 V96 M14 76 H46 M19 63 L41 89 M41 63 L19 89" stroke="#000" stroke-width="0.8" fill="none"/>
+            <path d="M20 82 Q24 71 28 80 Q24 86 20 82Z" fill="#fff" stroke="#000" stroke-width="2"/>
+            <path d="M40 82 Q36 71 32 80 Q36 86 40 82Z" fill="#fff" stroke="#000" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+      <div class="vol-value" id="vol-value">70%</div>
+      <div class="vol-hint">With great volume comes great responsibility.<br>Grab Spidey &amp; swing him ⬅ ➡</div>
+    </aside>
+  </div>
+
+  <!-- header. at the bottom. obviously. -->
+  <header class="bottom-header">
+    <h1>CODEVERSE</h1>
+    <div class="subtitle">^ this is the header ^</div>
+  </header>
+
+  <!-- the cookie banner that will never leave -->
+  <div class="cookie-banner" id="cookie-banner">
+    🍪 We use cookies. And ads. Mostly ads.
+    <button class="btn" data-action="cookie">Accept</button>
+    <button class="btn" data-action="cookie">Also Accept</button>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <!-- background "music" that plays the whole time -->
+  <audio id="bg-audio" src="assets/worstsoundever.mp3" loop preload="auto"></audio>
+
+  <!-- ===== AD POPUP ===== -->
+  <div id="ad-overlay" class="hidden">
+    <div class="ad-box">
+      <div class="ad-label">📢 ADVERTISEMENT (MANDATORY) 📢</div>
+      <video id="ad-video" src="assets/ad.mp4" playsinline preload="auto"></video>
+      <div id="ad-placeholder" class="ad-placeholder hidden">
+        <div class="big">🛒 BUY NOW!!! 🛒</div>
+        <div>AD VIDEO PLACEHOLDER</div>
+        <div class="small">put your file at <code>assets/ad.mp4</code></div>
+      </div>
+      <div class="ad-countdown">Ad ends in <span id="ad-count">5</span>…</div>
+    </div>
+    <!-- the X is outside the box so it can run anywhere on screen -->
+    <button id="ad-close" class="ad-close" data-noad aria-label="Close ad">✖</button>
+  </div>
+
+  <!-- ===== TIMEOUT ===== -->
+  <div id="timeout-overlay" class="hidden">
+    <div class="timeout-box" id="timeout-box">😈 Uh Oh you're in timeout 😈</div>
+  </div>
+
+  <!-- ===== RICKROLL ===== -->
+  <div id="rickroll" class="hidden">
+    <video id="rick-video" src="assets/rickroll.mp4" loop playsinline preload="auto"></video>
+    <div id="rick-placeholder" class="rick-placeholder hidden">
+      <div class="big">🎵 NEVER GONNA GIVE YOU UP 🎵</div>
+      <div>NEVER GONNA LET YOU DOWN</div>
+      <div class="small">(placeholder — put your file at <code>assets/rickroll.mp4</code>)</div>
+    </div>
+    <div id="rick-hint" class="rick-hint hidden">🔇 click anywhere for sound 🔇</div>
+    <div class="rick-escape">you may leave in <span id="rick-count">15</span>…</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

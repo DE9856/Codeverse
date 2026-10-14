@@ -1,0 +1,529 @@
+/* =========================================================
+   CODEVERSE — the worst stylesheet ever written. On purpose.
+   (Animations are kept slow-ish: nothing flashes faster than
+   ~2x/sec, so it's ugly without being a seizure risk.)
+   ========================================================= */
+
+:root {
+  --lime: #39FF14;
+  --magenta: #FF00FF;
+  --cyan: #00FFFF;
+  --yellow: #FFFF00;
+  --orange: #FF6700;
+  --pink: #FF10F0;
+  --red: #FF0033;
+  --blue: #0011FF;
+}
+
+/* hide the real cursor everywhere — we draw our own so it can "freeze" */
+*, *::before, *::after { cursor: none !important; }
+
+html { scroll-behavior: auto; }
+
+body {
+  margin: 0;
+  font-family: "Comic Sans MS", "Comic Sans", "Papyrus", cursive;
+  color: #000;
+  background:
+    repeating-linear-gradient(45deg, var(--lime) 0 40px, var(--magenta) 40px 80px, var(--yellow) 80px 120px, var(--cyan) 120px 160px);
+  background-size: 226px 226px;
+  animation: bg-slide 6s linear infinite;
+  overflow-x: hidden;
+}
+@keyframes bg-slide { to { background-position: 226px 226px; } }
+
+.hidden { display: none !important; }
+
+/* ---------- fake cursor ---------- */
+#fake-cursor {
+  position: fixed;
+  left: 0; top: 0;
+  width: 36px; height: 36px;
+  pointer-events: none;
+  z-index: 2147483647;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M2 2 L2 20 L7 15 L11 23 L14 21.5 L10 14 L17 14 Z' fill='%2339FF14' stroke='%23FF00FF' stroke-width='1.8' stroke-linejoin='round'/></svg>") no-repeat;
+  background-size: contain;
+  filter: drop-shadow(2px 2px 0 #000);
+  transform: translate(-100px, -100px);
+}
+#fake-cursor.frozen { filter: drop-shadow(0 0 8px var(--red)) drop-shadow(2px 2px 0 #000); }
+
+/* ---------- top bits ---------- */
+.doom-timer {
+  position: fixed;
+  top: 50%;
+  left: -6px;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: top left;
+  z-index: 50;
+  background: var(--red);
+  color: var(--yellow);
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 22px;
+  padding: 8px 18px;
+  border: 5px dashed var(--yellow);
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.next-timer {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 60;
+  background: var(--yellow);
+  color: var(--red);
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 26px;
+  padding: 12px 20px;
+  border: 6px solid var(--red);
+  box-shadow: 10px 10px 0 var(--blue);
+  animation: shake 0.5s infinite;
+}
+@keyframes shake {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg) translateY(-3px); }
+}
+
+.top-footer {
+  background: var(--blue);
+  color: var(--lime);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  text-align: right;
+  padding: 6px 12px;
+  border-bottom: 4px dotted var(--orange);
+}
+
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--orange);
+  color: var(--blue);
+  font-family: Impact, sans-serif;
+  font-size: 28px;
+  border-top: 6px double var(--magenta);
+  border-bottom: 6px double var(--magenta);
+  padding: 6px 0;
+}
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 18s linear infinite;
+}
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+/* ---------- layout: nav right, volume left, content tilted ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 170px 1fr 220px;
+  grid-template-areas: "vol main nav";
+  gap: 30px;
+  padding: 30px 30px 30px 70px;
+  align-items: start;
+}
+
+.nav {
+  grid-area: nav;
+  background: var(--cyan);
+  border: 8px ridge var(--red);
+  padding: 12px;
+  transform: rotate(3deg);
+  margin-top: 140px;
+  display: flex;
+  flex-direction: column-reverse; /* items listed bottom-up, naturally */
+  gap: 10px;
+}
+.nav-title {
+  font-family: "Papyrus", fantasy;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--magenta);
+  text-shadow: 2px 2px 0 var(--yellow);
+}
+
+main {
+  grid-area: main;
+  transform: rotate(-1.2deg);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 20px;
+  padding: 10px 18px;
+  color: var(--yellow);
+  background: linear-gradient(var(--magenta), var(--red));
+  border: 5px outset var(--lime);
+  text-shadow: 2px 2px 0 #000;
+  letter-spacing: 1px;
+}
+.btn:hover { background: linear-gradient(var(--blue), var(--cyan)); color: var(--magenta); transform: scale(0.94) rotate(-2deg); }
+.btn:active { border-style: inset; }
+
+.nav-btn:nth-child(odd) { margin-left: 30px; }
+.nav-btn:nth-child(3n) { font-size: 14px; }
+.nav-btn.tiny { font-size: 10px; padding: 3px; }
+
+.next-btn {
+  font-size: 30px;
+  background: linear-gradient(90deg, var(--lime), var(--yellow));
+  color: var(--blue);
+  text-shadow: 2px 2px 0 var(--magenta);
+  border: 6px outset var(--orange);
+  box-shadow: 8px 8px 0 #000;
+}
+.decoy { font-size: 16px; }
+.pos-left { display: block; margin: 20px auto 0 0; }
+.pos-right { display: block; margin: 20px 0 0 auto; }
+.pos-top { display: block; margin: 0 0 10px auto; transform: rotate(4deg); }
+
+/* ---------- pages ---------- */
+.page {
+  display: none;
+  background: var(--yellow);
+  border: 10px groove var(--magenta);
+  padding: 24px;
+  box-shadow: 16px 16px 0 var(--blue), -10px -10px 0 var(--orange);
+}
+.page.active { display: block; }
+
+.page h2 {
+  font-family: Impact, sans-serif;
+  font-size: 46px;
+  margin: 0 0 16px;
+  color: var(--magenta);
+  -webkit-text-stroke: 2px var(--blue);
+  text-shadow: 4px 4px 0 var(--lime);
+}
+.wobble { animation: wobble 2s ease-in-out infinite; }
+@keyframes wobble {
+  0%, 100% { transform: rotate(-1deg) skewX(-4deg); }
+  50% { transform: rotate(1.5deg) skewX(5deg); }
+}
+
+.page p { font-size: 18px; line-height: 1.5; padding: 10px; margin: 12px 0; border: 3px dashed #000; }
+.p-yellow { background: var(--lime); }
+.p-cyan { background: var(--cyan); width: 70%; margin-left: auto !important; text-align: right; }
+.p-pink { background: var(--pink); color: var(--yellow); font-weight: bold; text-shadow: 1px 1px 0 #000; }
+.center { text-align: center; }
+.spacer-text { min-height: 500px; display: flex; align-items: flex-end; }
+.spacer-text p { background: var(--orange); }
+
+.ugly-table { width: 100%; border-collapse: separate; border-spacing: 6px; font-size: 18px; }
+.ugly-table th { background: var(--red); color: var(--yellow); padding: 8px; font-family: Impact, sans-serif; }
+.ugly-table td { padding: 8px; border: 3px solid var(--blue); }
+.ugly-table tr:nth-child(odd) td { background: var(--lime); }
+.ugly-table tr:nth-child(even) td { background: var(--magenta); color: var(--yellow); }
+.ugly-table td:nth-child(2) { text-align: right; }
+
+.prize-list { font-size: 22px; padding-left: 0; list-style: none; }
+.prize-list li { padding: 10px; margin: 8px 0; border: 4px dotted var(--red); }
+.prize-list li:nth-child(odd) { background: var(--cyan); margin-left: 60px; }
+.prize-list li:nth-child(even) { background: var(--pink); color: var(--yellow); text-shadow: 1px 1px 0 #000; }
+
+.ugly-form { display: flex; flex-direction: column; gap: 14px; font-size: 20px; }
+.ugly-form label { background: var(--cyan); padding: 10px; border: 4px solid var(--magenta); }
+.ugly-form label:nth-child(even) { text-align: right; background: var(--lime); }
+.ugly-form input[type=text], .ugly-form input[type=email], .ugly-form select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Courier New", monospace;
+  font-size: 18px;
+  padding: 8px;
+  background: var(--magenta);
+  color: var(--yellow);
+  border: 4px inset var(--orange);
+}
+.ugly-form input::placeholder { color: var(--lime); }
+
+.terms {
+  margin-top: 60px;
+  background: var(--lime);
+  border: 8px double var(--red);
+  padding: 20px;
+  font-size: 13px;
+}
+.terms h3 { font-family: Impact, sans-serif; font-size: 30px; color: var(--red); margin-top: 0; }
+.terms p { margin: 0 0 260px; }  /* lots of room. for reading. */
+.terms p:last-child { margin-bottom: 0; }
+
+/* ---------- volume (vertical bar, horizontal control) ---------- */
+.vol-panel {
+  grid-area: vol;
+  position: sticky;
+  top: 200px;
+  background: var(--magenta);
+  border: 8px outset var(--yellow);
+  padding: 14px;
+  text-align: center;
+  transform: rotate(-4deg);
+  touch-action: none;
+  user-select: none;
+}
+.vol-title { font-family: Impact, sans-serif; font-size: 20px; color: var(--lime); text-shadow: 2px 2px 0 #000; }
+
+/* the web hangs straight down; Spidey swings left/right on it */
+.web-rig {
+  position: relative;
+  height: 290px;
+  margin: 10px auto;
+  background:
+    radial-gradient(circle at 50% 0, transparent 0 30px, rgba(255,255,255,.6) 31px 32px, transparent 33px 60px, rgba(255,255,255,.6) 61px 62px, transparent 63px),
+    var(--blue);
+  border: 5px inset var(--lime);
+  overflow: visible;
+}
+.web-anchor {
+  position: absolute;
+  top: -6px; left: 50%;
+  width: 18px; height: 18px;
+  margin-left: -9px;
+  background: var(--yellow);
+  border: 3px solid #000;
+  border-radius: 50%;
+  z-index: 2;
+}
+.web-pendulum {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 60px;
+  margin-left: -30px;
+  transform-origin: 50% 0;
+  transform: rotate(-12deg);
+}
+.web-line {
+  width: 3px;
+  height: 180px;
+  margin: 0 auto;
+  background: repeating-linear-gradient(0deg, #fff 0 6px, #ccc 6px 9px);
+  box-shadow: 0 0 6px #fff;
+}
+.spidey { display: block; filter: drop-shadow(3px 3px 0 var(--lime)); }
+
+.vol-value { font-family: Impact, sans-serif; font-size: 30px; color: var(--yellow); text-shadow: 3px 3px 0 var(--blue); }
+.vol-hint { font-size: 10px; color: var(--cyan); margin-top: 6px; }
+
+/* ---------- header at the bottom ---------- */
+.bottom-header {
+  text-align: center;
+  background: var(--red);
+  border-top: 12px ridge var(--cyan);
+  padding: 20px 0 90px;
+}
+.bottom-header h1 {
+  margin: 0;
+  font-family: Impact, sans-serif;
+  font-size: 110px;
+  color: var(--yellow);
+  -webkit-text-stroke: 4px var(--blue);
+  text-shadow: 8px 8px 0 var(--lime), 16px 16px 0 var(--magenta);
+}
+.subtitle { color: var(--lime); font-size: 14px; }
+
+/* ---------- cookie banner ---------- */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  z-index: 40;
+  background: var(--cyan);
+  border: 6px dashed var(--magenta);
+  padding: 10px;
+  font-size: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cookie-banner.flip { left: auto; right: 0; top: 120px; bottom: auto; }
+.cookie-banner .btn { font-size: 14px; padding: 5px 10px; }
+
+.toast {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-3deg);
+  z-index: 70;
+  background: var(--lime);
+  color: var(--magenta);
+  font-family: Impact, sans-serif;
+  font-size: 36px;
+  padding: 24px 36px;
+  border: 10px ridge var(--orange);
+  text-shadow: 2px 2px 0 #000;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ---------- AD POPUP ---------- */
+#ad-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(255, 0, 255, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ad-box {
+  width: min(640px, 90vw);
+  background: var(--yellow);
+  border: 12px ridge var(--lime);
+  box-shadow: 0 0 0 8px var(--red), 20px 20px 0 8px var(--blue);
+  padding: 14px;
+  text-align: center;
+  transform: rotate(2deg);
+}
+.ad-label { font-family: Impact, sans-serif; font-size: 24px; color: var(--red); margin-bottom: 10px; }
+#ad-video { width: 100%; max-height: 60vh; background: #000; display: block; }
+.ad-placeholder {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: repeating-linear-gradient(-45deg, var(--orange) 0 20px, var(--pink) 20px 40px);
+  font-family: Impact, sans-serif;
+  font-size: 26px;
+  color: var(--yellow);
+  text-shadow: 2px 2px 0 #000;
+}
+.ad-placeholder .big { font-size: 54px; }
+.ad-placeholder .small, .rick-placeholder .small { font-family: "Courier New", monospace; font-size: 15px; }
+.ad-countdown { font-size: 20px; margin-top: 10px; font-weight: bold; color: var(--blue); }
+
+.ad-close {
+  position: fixed;
+  z-index: 1001;
+  width: 48px;
+  height: 48px;
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--yellow);
+  background: var(--red);
+  border: 4px outset var(--lime);
+  border-radius: 50%;
+  transition: left 0.08s, top 0.08s;
+}
+
+/* ---------- TIMEOUT ---------- */
+#timeout-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(0, 0, 0, 0.15);
+}
+.timeout-box {
+  position: fixed;
+  background: var(--red);
+  color: var(--yellow);
+  font-family: Impact, sans-serif;
+  font-size: 34px;
+  padding: 18px 28px;
+  border: 8px dashed var(--yellow);
+  box-shadow: 12px 12px 0 var(--lime);
+  white-space: nowrap;
+  transform: rotate(-4deg);
+}
+
+/* ---------- RICKROLL ---------- */
+#rickroll {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#rick-video { width: 100%; height: 100%; object-fit: contain; }
+.rick-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  font-family: Impact, sans-serif;
+  font-size: 40px;
+  color: var(--lime);
+  text-align: center;
+}
+.rick-placeholder .big { font-size: 70px; color: var(--magenta); animation: wobble 1s infinite; }
+.rick-hint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--yellow);
+  color: var(--red);
+  font-family: Impact, sans-serif;
+  font-size: 26px;
+  padding: 10px 20px;
+  border: 5px solid var(--red);
+}
+
+.rick-escape {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  background: var(--lime);
+  color: var(--blue);
+  font-family: Impact, sans-serif;
+  font-size: 22px;
+  padding: 8px 16px;
+  border: 5px dashed var(--magenta);
+  transform: rotate(3deg);
+}
+
+/* =========================================================
+   ASYMMETRY — nothing lines up with anything. On purpose.
+   ========================================================= */
+.layout {
+  grid-template-columns: 150px 1fr 260px;
+  column-gap: 70px;
+  padding: 50px 12px 30px 95px;
+}
+.top-footer { padding-left: 35%; text-align: left; }
+.marquee { transform: rotate(-1.3deg); margin: 6px -20px 0 40px; }
+
+.vol-panel { margin-top: 320px; transform: rotate(-7deg) translateX(-12px); border-width: 4px 14px 8px 2px; }
+.nav { margin-top: 30px; margin-right: -30px; transform: rotate(5deg) translateY(60px); border-width: 14px 3px 6px 10px; }
+.nav-btn:nth-child(4) { margin-left: -25px; width: 115%; }
+.nav-btn:nth-child(5) { transform: rotate(-6deg); }
+
+main { transform: rotate(-2deg) translateX(25px); }
+.page {
+  border-width: 4px 24px 10px 2px;
+  border-radius: 0 90px 0 25px;
+  box-shadow: 26px 10px 0 var(--blue), -6px -18px 0 var(--orange);
+  padding: 18px 40px 30px 16px;
+}
+.page h2 { margin-left: 40px; }
+.page p:nth-of-type(odd) { margin-right: 18%; }
+.page p:nth-of-type(even) { margin-left: 8%; transform: rotate(1deg); }
+.ugly-table { width: 92%; margin-left: 6%; }
+.ugly-form label:nth-child(3) { margin-right: 25%; }
+.ugly-form label:nth-child(4) { margin-left: 40%; }
+
+.terms { margin: 80px -30px 0 90px; transform: rotate(1.5deg); border-width: 3px 8px 16px 8px; }
+.terms p:nth-child(odd) { padding-left: 30%; }
+
+.bottom-header { text-align: left; padding-left: 12%; border-top-width: 4px; }
+.bottom-header h1 { display: inline-block; transform: rotate(-3deg); }
+.subtitle { margin-left: 45%; }
+
+.ad-box { transform: rotate(3deg) translate(6vw, -4vh); border-width: 6px 22px 12px 4px; }
+
+/* small screens: still terrible, but readable */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; grid-template-areas: "nav" "main" "vol"; padding: 20px 16px 20px 60px; }
+  .nav { margin-top: 0; margin-right: 0; }
+  .vol-panel { margin-top: 0; }
+  .terms { margin-right: 0; }
+  .bottom-header h1 { font-size: 60px; }
+  .cookie-banner { width: 90%; }
+}
